@@ -39,7 +39,7 @@ def format_utc_to_tw(date_str, time_str):
 
 def get_f1_driver_standings():
     """抓取最新 F1 車手積分榜 (Top 5)"""
-    url = "https://api.jolpica.net/ergast/f1/current/driverstandings.json"
+    url = "https://api.jolpica.ca/ergast/f1/current/driverstandings.json"
     try:
         res = requests.get(url, timeout=10)
         if res.status_code != 200:
@@ -68,7 +68,7 @@ def get_f1_driver_standings():
 
 def get_next_race_schedule():
     """抓取下一場大獎賽完整時間表（含排位賽、衝刺賽，自動轉台灣時間）"""
-    url = "https://api.jolpica.net/ergast/f1/current/next.json"
+    url = "https://api.jolpica.ca/ergast/f1/current/next.json"
     try:
         res = requests.get(url, timeout=10)
         if res.status_code != 200:
