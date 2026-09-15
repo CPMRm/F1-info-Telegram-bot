@@ -2,8 +2,10 @@ name: Run F1 Telegram Bot
 
 on:
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+    - cron: '0 0 * * *'  # 保持原本的每天自動定時推播
+  workflow_dispatch:      # 支援 GitHub 網頁手動觸發
+  repository_dispatch:    # 🔥 新增：支援 Telegram 按鈕/Webhook 觸發
+    types: [telegram_command]
 
 jobs:
   run-python-script:
@@ -26,4 +28,6 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # 讀取 Telegram 觸發時傳遞的指令類別
+          ACTION_TYPE: ${{ github.event.client_payload.action }}
         run: python bot.py
